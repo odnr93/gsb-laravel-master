@@ -41,7 +41,14 @@ class PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
-
+	
+	public function getInfosComptable($login, $mdp){
+		$req = "select comptable.id_compt as id, comptable.name as nom, comptable.Prenom as prenom from comptable 
+        where comptable.login='" . $login . "' and comptable.mdp='" . $mdp ."'";
+    	$rs = $this->monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
 
 
 /**
@@ -211,8 +218,24 @@ class PdoGsb{
 		$this->monPdo->exec($req);
 	}
 
-
-
-
-
+	public function getLesFichesValider(){
+		$req = "select fichefrais.idvisiteur as idvisiteur, fichefrais.mois as mois, fichefrais.montantValide as montantValide, 
+		fichefrais.dateModif as dateModif, visiteur.nom as nom, visiteur.prenom as prenom, fichefrais.idEtat as idEtat
+		from  fichefrais inner join visiteur on fichefrais.idvisiteur = visiteur.id
+		where fichefrais.idEtat ='CL' 
+		order by fichefrais.mois desc ";
+		$res = $this->monPdo->query($req);
+		$lesFiches =array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$mois = $laLigne['mois'];
+			$numAnnee =substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$laLigne['numAnnee']=$numAnnee;
+			$laLigne['numMois']=$numMois;
+			$lesFiches[]=$laLigne;
+			$laLigne = $res->fetch(); 		
+		}
+		return $lesFiches;
+	}
 }

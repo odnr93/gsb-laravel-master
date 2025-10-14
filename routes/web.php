@@ -48,5 +48,8 @@ Route::post('sauvegarderFrais',[
         'uses'=>'gererFraisController@sauvegarderFrais'
 ]);
 
-
+Route::get('suiviPaiment',[
+        'as'=>'chemin_SuiviPaiment',
+        'uses'=>'gererFraisController@suivipaiment'
+]);
 

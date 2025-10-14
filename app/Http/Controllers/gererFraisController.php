@@ -65,7 +65,21 @@ class gererFraisController extends Controller{
             return view('connexion')->with('erreurs',null);
         }
     }
+
+    function suivipaiment(Request $request){
+        if( session('visiteur') != null){
+            $visiteur = session('visiteur');
+            $comptables = PdoGsb::getLesFichesValider();
+            $view = view('suiviPaiment')
+                    ->with('visiteur',$visiteur);
+            return $view;
+        }
+        else{
+            return view('connexion')->with('erreurs',null);
+        }
+    }
 }
+
 
 
 

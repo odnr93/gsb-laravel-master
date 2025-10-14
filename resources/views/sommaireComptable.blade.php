@@ -7,11 +7,11 @@
              </div>  
                <ul id="menuList">
                    <li >
-                    <strong>Bonjour {{ $visiteur['nom'] . ' ' . $visiteur['prenom'] }} vous êtes connecter en tant que visisteur </strong>
+                    <strong>Bonjour {{ $visiteur['nom'] . ' ' . $visiteur['prenom'] }} vous êtes connecte en tant que comptable</strong>
                       
                    </li>
                   <li class="smenu">
-                     <a href="{{ route('chemin_gestionFrais')}}" title="Saisie fiche de frais ">Saisie fiche de frais</a>
+                     <a href="{{ route('chemin_SuiviPaiment')}}" title="Saisie de paiment ">Suivi de paiment</a>
                   </li>
                   <li class="smenu">
                     <a href="{{ route('chemin_selectionMois') }}" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
